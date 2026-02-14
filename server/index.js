@@ -1,39 +1,15 @@
 import express from 'express'
+import { userRouter } from './routes/course'
+import { courseRouter } from './routes/user';
+import { use } from 'react';
 
 const app = express()
 
-app.post("/user/signup", function(req, res){
-    res.status(200).json({
-        message:"signup endpoint"
-    })       
-})
+userRouter(app);
+courseRouter(app);
 
-app.post("/user/signin", function(res, req){
-     res.status(200).json({
-        message:"signin endpoint"
-     })
-})
 
-app.get("/user/purchase", function(req, res){
-    res.status(200).json(
-        {
-            message:"sigin endpoint"
-        }
-    )
-})
-
-      // you would expect the user pay you  money     
-app.post("/course/purchase", function(res,req){
-    res.status(200).json({
-        message:"courses endpoint"
-    })
-})
-
-app.get("/courses", function(res,req){
-   res.status(200).json({
-    message: "courses endpoint"
-   })
-})
-
+app.use("/user", userRouter);
+app.use("/courses", courseRouter)
 
 app.listen(3000)
