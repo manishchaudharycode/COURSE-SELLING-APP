@@ -1,15 +1,15 @@
 import express from 'express'
-import { userRouter } from './routes/course'
-import { courseRouter } from './routes/user';
-import { use } from 'react';
+import  userRouter  from './routes/user.js';
+import  courseRouter  from './routes/course.js';
+import  adminRouter   from './routes/admin.js';
 
 const app = express()
 
-userRouter(app);
-courseRouter(app);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/admin", adminRouter )
+app.use("/api/v1/courses", courseRouter)
 
-
-app.use("/user", userRouter);
-app.use("/courses", courseRouter)
-
-app.listen(3000)
+app.listen(3000, () =>{
+    console.log("server start");
+    
+})

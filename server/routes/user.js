@@ -8,7 +8,7 @@ const userRouter = Router();
     })       
   })
 
-   userRouter.post("/signin", function(res, req){
+   userRouter.post("/signin", function(req, res){
      res.status(200).json({
         message:"signin endpoint"
      })
@@ -22,6 +22,4 @@ const userRouter = Router();
     )
   })
 
-module.exports ={
-    userRouter: userRouter
-}
+export default userRouter;
