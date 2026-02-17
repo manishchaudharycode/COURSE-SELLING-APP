@@ -1,7 +1,7 @@
 import mongoose, {  Schema } from "mongoose";
 console.log("connect To");
 
-mongoose.connect("mongodb+srv://course:fKZwTACiRvIaAiGa@cluster0.duntwbz.mongodb.net/coursera-app")
+mongoose.connect("")
 const objectId = mongoose.Types.ObjectId
 
 const userSchema = new Schema({
