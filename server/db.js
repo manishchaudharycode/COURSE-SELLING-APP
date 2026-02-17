@@ -34,8 +34,8 @@ const purchaseSchema = new Schema({
  const userModel =mongoose.model("user", userSchema);
  export default userModel
  export const adminModel =mongoose.model("admin", adminSchema);
- const courseModel = mongoose.model("course", courseSchema);
- const purchaseModel = mongoose.model("purchase", purchaseSchema);
+export const courseModel = mongoose.model("course", courseSchema);
+ export const purchaseModel = mongoose.model("purchase", purchaseSchema);
 
 //  module.exports ={
 //     userModel,
