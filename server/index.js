@@ -3,6 +3,7 @@ import  userRouter  from './routes/user.js';
 import  courseRouter  from './routes/course.js';
 import  adminRouter   from './routes/admin.js';
 
+
 const app = express();
 app.use(express.json());
 
@@ -12,5 +13,5 @@ app.use("/api/v1/courses", courseRouter)
 
 app.listen(3000, () =>{
     console.log("server start");
-    
+   
 })

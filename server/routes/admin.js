@@ -24,7 +24,7 @@ adminRouter.post('/signup', async (req, res)=>{
     
 })
 
-adminRouter.post('/signin', async(req, res)=>{
+adminRouter.post('/signin', async(req, res) =>  {
     const { email, password } = req.body;
     
     const user = await adminModel.findOne({
@@ -33,7 +33,7 @@ adminRouter.post('/signin', async(req, res)=>{
     })
 
     if (user) {
-        const token = jwt.sign({ id: admin._id }, JWT_ADMIN_PASSWORD)
+        const token = jwt.sign({ id: admin._id }, JWT_ADMIN_PASSWORD);
         res.status(200).json({
             token: token
         })

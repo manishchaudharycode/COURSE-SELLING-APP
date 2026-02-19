@@ -1,7 +1,10 @@
-import mongoose, {  Schema } from "mongoose";
-console.log("connect To");
+import mongoose, {  Schema } from "mongoose"; 
+import dotenv from "dotenv";
+dotenv.config({ path: "../.env" }); 
 
-mongoose.connect("")
+mongoose.connect(process.env.MONGO_URL)
+    .then(() => console.log("MongoDB connected"))
+    .catch(err => console.log(err));
 const objectId = mongoose.Types.ObjectId
 
 const userSchema = new Schema({
@@ -34,15 +37,9 @@ const purchaseSchema = new Schema({
  const userModel =mongoose.model("user", userSchema);
  export default userModel
  export const adminModel =mongoose.model("admin", adminSchema);
-export const courseModel = mongoose.model("course", courseSchema);
+ export const courseModel = mongoose.model("course", courseSchema);
  export const purchaseModel = mongoose.model("purchase", purchaseSchema);
 
-//  module.exports ={
-//     userModel,
-//     adminModel,
-//     courseModel,
-//     purchaseModel
-//  }
 
 
 
