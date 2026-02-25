@@ -24,6 +24,7 @@ adminRouter.post('/signup', async (req, res)=>{
     
 })
 
+
 adminRouter.post('/signin', async(req, res) =>  {
     const { email, password } = req.body;
     
@@ -33,16 +34,17 @@ adminRouter.post('/signin', async(req, res) =>  {
     })
 
     if (user) {
-        const token = jwt.sign({ id: admin._id }, JWT_ADMIN_PASSWORD);
-        res.status(200).json({
+         const token = jwt.sign({id:adminMiddleware._id}, JWT_ADMIN_PASSWORD)
+         res.status(200).json({
             token: token
-        })
+         })
     } else {
-     res.status(400).json({
-        Message:"Incorrect credentials"
-    })   
+        res.status(403).json({
+            message: "incorrect credentails"
+        })
     }
 })
+
 
 adminRouter.post('/course', adminMiddleware, async(req, res) =>{
     const adminId = req.userId
@@ -62,17 +64,47 @@ adminRouter.post('/course', adminMiddleware, async(req, res) =>{
     })
 })
 
-adminRouter.put('/', function(req, res){
+
+adminRouter.put('/', adminMiddleware, async(req, res)=>{
+    const adminId = req.userId
+
+    const { title, description, imageUrl, price, courseId  } = req.body
+
+    const course = await courseModel.updateOne({
+        _id:courseId._id,
+        creatorId: adminId
+    },{
+        title: title,
+        description: description,
+        imageUrl: imageUrl,
+        price:price
+    })
+    
+
     res.status(200).json({
-        Message:"course endpoint"
+        Message:"updated course",
+        courseId:course._id
     })
 })
 
-adminRouter.get('/bulk', function(req, res){
+adminRouter.get('/bulk', async(req, res)=>{
+
+    const adminId = req.userId;
+
+    const courses = await courseModel.find({
+        creatorId: adminId
+    })
     res.status(200).json({
-        Message:"course bulk endpoint"
+        Message:"update courses",
+        courses
+
     })
 })
 
+// "title":"Black Tiger",
+// "description":"Black Tigers are a rare color variant of the Bengal tiger, not a disti…",
+// "price":2999,
+// "imageUrl":"https://imgs.search.brave.com/Ddbr0OudFW27usE0tOFl4s_TSv87vKoeNXVlBS35…" 
+// 699e75bc4b018d87266a5558
 
 export default adminRouter;

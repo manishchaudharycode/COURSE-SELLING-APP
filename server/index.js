@@ -13,5 +13,6 @@ app.use("/api/v1/courses", courseRouter)
 
 app.listen(3000, () =>{
     console.log("server start");
+    
    
 })
