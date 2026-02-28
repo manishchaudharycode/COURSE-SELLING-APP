@@ -65,7 +65,7 @@ adminRouter.post('/course', adminMiddleware, async(req, res) =>{
 })
 
 
-adminRouter.put('/', adminMiddleware, async(req, res)=>{
+adminRouter.put('/course', adminMiddleware, async(req, res)=>{
     const adminId = req.userId
 
     const { title, description, imageUrl, price, courseId  } = req.body
@@ -87,7 +87,7 @@ adminRouter.put('/', adminMiddleware, async(req, res)=>{
     })
 })
 
-adminRouter.get('/bulk', async(req, res)=>{
+adminRouter.get('/course/bulk', async(req, res)=>{
 
     const adminId = req.userId;
 
@@ -101,10 +101,6 @@ adminRouter.get('/bulk', async(req, res)=>{
     })
 })
 
-// "title":"Black Tiger",
-// "description":"Black Tigers are a rare color variant of the Bengal tiger, not a disti…",
-// "price":2999,
-// "imageUrl":"https://imgs.search.brave.com/Ddbr0OudFW27usE0tOFl4s_TSv87vKoeNXVlBS35…" 
-// 699e75bc4b018d87266a5558
+
 
 export default adminRouter;

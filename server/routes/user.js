@@ -1,7 +1,8 @@
 import { Router  } from "express";
-import userModel from "../db.js"
+import userModel, {  purchaseModel } from "../db.js"
 import  jwt  from "jsonwebtoken";
 import { JWT_USER_PASSWORD } from "../config.js";
+import userMiddleware from "../middleware/user.js";
 const userRouter = Router();
 
     userRouter.post("/signup", async(req, res) =>{
@@ -40,10 +41,15 @@ const userRouter = Router();
      }
    })
 
-   userRouter.get("/purchase", function(req, res){
+   userRouter.get("/purchase",userMiddleware, async function(req, res){
+    const userId = req.userId
+
+    const purchases = await purchaseModel.find({
+        userId
+    })
     res.status(200).json(
         {
-            message:"sigin endpoint"
+           purchases
         }
     )
   })
